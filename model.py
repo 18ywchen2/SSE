@@ -6,7 +6,6 @@ import copy
 import torch.nn.functional as F
 from torch.nn import CrossEntropyLoss, MSELoss, BCEWithLogitsLoss, BCELoss
 
-qqq=6
 class RobertaClassificationHead(nn.Module):
     """Head for sentence-level classification tasks."""
 
@@ -18,14 +17,14 @@ class RobertaClassificationHead(nn.Module):
         self.out_proj = nn.Linear(config.hidden_size, 1)
         self.sigmoid = nn.Sigmoid()
         self.tanh = nn.Tanh()
-        self.emb = nn.Embedding(44, 1)
+        self.emb = nn.Embedding(44, 768)
         self.BatchNorm1d = nn.BatchNorm1d(config.hidden_size * 1)
         self.BatchNorm1d2 = nn.BatchNorm1d(config.hidden_size * 2)
         self.lstm1 = nn.LSTM(input_size=768, hidden_size=384, num_layers=1, bias=True, batch_first=True,
                              dropout=0.1,
                              bidirectional=True)
         self.tree = nn.Linear(768, 768)
-        self.GRU = nn.GRU(input_size=1, hidden_size=768, num_layers=1, bias=True, dropout=0.1, bidirectional=False)
+        self.GRU = nn.GRU(input_size=768, hidden_size=768, num_layers=1, bias=True, dropout=0.1, bidirectional=False)
         self.GRU1 = nn.GRU(input_size=768, hidden_size=384, num_layers=1, bias=True, dropout=0.1, bidirectional=True)
 
     def forward(self, feature_s, source_idx, train_AST, feature_t=None, target_idx=None, test_AST=None):
@@ -49,7 +48,7 @@ class RobertaClassificationHead(nn.Module):
                     output = torch.max(output, dim=0).values
                     sub_vec = torch.relu(output)
                     sub_vec = sub_vec.flatten(0).unsqueeze(0)
-                    if k == 0:
+                    if k == 0 and l == 0:
                         subs_vec = sub_vec
                     else:
                         subs_vec = torch.cat((subs_vec, sub_vec), dim=0)
@@ -85,7 +84,7 @@ class RobertaClassificationHead(nn.Module):
                 output = torch.max(output, dim=0).values
                 sub_vec = torch.relu(output)
                 sub_vec = sub_vec.flatten(0).unsqueeze(0)
-                if k == 0:
+                if k == 0 and l == 0:
                     subs_vec = sub_vec
                 else:
                     subs_vec = torch.cat((subs_vec, sub_vec), dim=0)
