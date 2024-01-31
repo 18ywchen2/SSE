@@ -303,7 +303,7 @@ def main(source_project, target_project):
     parser.add_argument("--warmup_steps", default=None, type=int,
                         help="Linear warmup over warmup_steps.")
     parser.add_argument("--EarlyStopping_Loss", default=None, type=float,
-                        help="Set an Earlystopping to avoid overfitting.")
+                        help="Considering setting an Earlystopping loss to avoid overfitting.")
     parser.add_argument('--seed', type=int, default=None,
                         help="random seed for initialization")
     parser.add_argument('--epochs', type=int, default=None,
