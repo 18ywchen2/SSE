@@ -301,8 +301,7 @@ def convert_examples_to_features(examples, tokenizer, args):
                 L = (args.code_length - 2) * args.code_snippets - i
                 subtrees.append(subtree[:L])
                 break
-        if sum([i > 1 for i in position_idxs]) - sum([len(y) for y in subtrees]) != 2 * args.code_snippets:
-            print("Error")
+
         features.append(
             InputFeatures(
                 source_idss,
