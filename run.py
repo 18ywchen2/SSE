@@ -166,7 +166,7 @@ def train(args, train_dataset, train_AST, test_dataset, test_AST, model):
             tr_num += 1
             train_loss += loss.item()
             avg_loss = round(train_loss / tr_num, 5)
-            if avg_loss < 0.6 and tr_num >= 10:
+            if avg_loss < args.EarlyStopping_Loss and tr_num >= 10:
                 EarlyStopping = True
                 break
             optimizer.step()
@@ -302,7 +302,8 @@ def main(source_project, target_project):
                         help="If > 0: set total number of training steps to perform. Override num_train_epochs.")
     parser.add_argument("--warmup_steps", default=None, type=int,
                         help="Linear warmup over warmup_steps.")
-
+    parser.add_argument("--EarlyStopping_Loss", default=None, type=float,
+                        help="Set an Earlystopping to avoid overfitting.")
     parser.add_argument('--seed', type=int, default=None,
                         help="random seed for initialization")
     parser.add_argument('--epochs', type=int, default=None,
