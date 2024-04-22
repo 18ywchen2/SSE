@@ -17,7 +17,7 @@ First, clone the repository to your local machine:
 ```bash
 git clone https://github.com/18ywchen2/SSE.git
 cd SSE
-
+```
 * pip
 
     In your virtual environment, run:
