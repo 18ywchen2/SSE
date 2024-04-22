@@ -35,7 +35,6 @@ Run the preprocessing script to prepare the data:
 ```
 python preprocessing.py
 ```
-
 Running the Application
 To start the defect prediction process, execute:
 ```
