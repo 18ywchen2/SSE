@@ -29,7 +29,6 @@ cd SSE
     to install the required packages.
 
 ## Usage
-
 preprocessing
 Run the preprocessing script to prepare the data:
 ```
@@ -40,7 +39,6 @@ To start the defect prediction process, execute:
 ```
 python run.py
 ```
-
 
 ## 
 More details and code comments are being added!
